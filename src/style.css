@@ -1,0 +1,281 @@
+:root {
+    --primary: #FF3D00;
+    --secondary: #00E5FF;
+    --dark: #0A0E27;
+    --darker: #050816;
+    --light: #E8EAF6;
+    --glass: rgba(255, 255, 255, 0.03);
+    --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* 1. RESET Y BASE */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    background-color: #050816; /* Color sólido de base */
+    color: var(--light);
+    font-family: 'IBM Plex Mono', monospace;
+    margin: 0;
+    overflow-x: hidden;
+    min-height: 100vh;
+    position: relative;
+    z-index: 0; /* Base */
+}
+
+/* Capa de Partículas Mejorada */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Gradientes blancos más definidos para que se vean sobre el negro */
+    background-image: 
+        radial-gradient(1.5px 1.5px at 25% 35%, rgba(255, 255, 255, 0.8), transparent),
+        radial-gradient(1.5px 1.5px at 50% 70%, rgba(255, 255, 255, 0.6), transparent),
+        radial-gradient(1.5px 1.5px at 75% 20%, rgba(255, 255, 255, 0.7), transparent),
+        radial-gradient(2px 2px at 10% 90%, rgba(0, 229, 255, 0.4), transparent); /* Partícula cyan */
+    background-size: 400px 400px;
+    animation: particlesAnim 60s linear infinite;
+    opacity: 0.4; /* Aumentamos opacidad para que sean visibles */
+    z-index: -1; /* Justo detrás del contenido */
+    pointer-events: none;
+}
+
+@keyframes particlesAnim {
+    from { transform: translateY(0); }
+    to { transform: translateY(-400px); }
+}
+
+/* 3. LAYOUT */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+
+header {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(5, 8, 22, 0.85);
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    padding: 1.2rem 0;
+}
+
+nav { display: flex; justify-content: space-between; align-items: center; }
+
+.logo { font-family: 'Syne', sans-serif; font-size: 1.5rem; font-weight: 800; color: var(--secondary); letter-spacing: -1px; }
+
+/* 4. NAVEGACIÓN */
+.nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--light);
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    transition: var(--transition);
+    opacity: 0.7;
+}
+
+.nav-links a:hover { opacity: 1; color: var(--secondary); text-shadow: 0 0 10px rgba(0, 229, 255, 0.4); }
+
+/* 5. HERO SECTION */
+.hero { padding: 12rem 0 8rem; animation: fadeIn 1s ease-out; }
+
+.highlight {
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+h1 { font-family: 'Syne', sans-serif; font-size: clamp(3rem, 8vw, 5rem); line-height: 1.1; margin: 1.5rem 0; font-weight: 800; }
+
+.badge {
+    background: var(--glass);
+    border: 1px solid var(--secondary);
+    padding: 0.6rem 1.2rem;
+    border-radius: 2rem;
+    font-size: 0.75rem;
+    color: var(--secondary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* 6. STACK TECNOLÓGICO (Efecto Glass-Card) */
+.stack-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+}
+
+.tech-card {
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    text-align: center;
+    transition: var(--transition);
+}
+
+.tech-card {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1.2rem;
+    padding: 2rem;
+    transition: all 0.3s ease;
+    /* Efecto de profundidad */
+    box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.02);
+}
+.tech-card:hover {
+    border-color: var(--secondary);
+    background: rgba(0, 229, 255, 0.05);
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5), 0 0 15px rgba(0, 229, 255, 0.1);
+}
+
+.tech-emoji { font-size: 2.5rem; margin-bottom: 1rem; display: block; }
+
+/* 7. PROYECTOS */
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+}
+
+.project-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.project-header {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+}
+
+.project-logo {
+    width: 65px;
+    height: 65px;
+    background: var(--dark);
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.project-logo img {
+    width: 80%;
+    height: 80%;
+    object-fit: contain;
+}
+
+.project-title-area h3 {
+    font-size: 1.2rem;
+    margin-top: 0.2rem;
+    color: var(--light);
+}
+
+.project-body p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    opacity: 0.8;
+    margin-bottom: 1.5rem;
+}
+
+/* Botón estilo "Cápsula" como en la imagen */
+.btn-live {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.6rem 1.2rem;
+    background: var(--secondary);
+    color: var(--darker);
+    border-radius: 2rem;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 700;
+    transition: var(--transition);
+    align-self: flex-start;
+}
+
+.btn-live:hover {
+    transform: translateX(5px);
+    box-shadow: 0 0 20px rgba(0, 229, 255, 0.4);
+}
+
+.tech-tag { color: var(--secondary); font-size: 0.7rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.5rem; display: block; }
+
+/* 8. MODAL Y UI */
+.modal-overlay {
+    position: fixed; inset: 0; background: rgba(5, 8, 22, 0.95);
+    display: none; place-items: center; z-index: 1000;
+    backdrop-filter: blur(10px);
+}
+
+.modal-overlay.active { display: grid; }
+
+.modal-card {
+    background: var(--dark);
+    padding: 3rem; border-radius: 2rem;
+    width: 90%; max-width: 550px;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.btn { 
+    padding: 1rem 2rem; border-radius: 0.8rem; cursor: pointer; 
+    font-weight: 600; text-decoration: none; border: none; 
+    transition: var(--transition); display: inline-block;
+}
+
+.btn-primary { background: var(--primary); color: white; }
+.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(255, 61, 0, 0.4); }
+
+.btn-secondary { background: transparent; border: 1px solid rgba(255,255,255,0.2); color: white; margin-left: 1rem; }
+
+/* ANIMACIONES */
+@keyframes fadeIn { 
+    from { opacity: 0; transform: translateY(30px); } 
+    to { opacity: 1; transform: translateY(0); } 
+}
+/* 9. SECCIÓN DE CONTACTO */
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.contact-item {
+    background: var(--glass);
+    padding: 2.5rem;
+    border-radius: 1.5rem;
+    border: 1px solid rgba(255,255,255,0.05);
+    transition: var(--transition);
+}
+
+.contact-item:hover {
+    border-color: var(--secondary);
+    transform: translateY(-5px);
+}
+
+.contact-icon {
+    font-size: 2rem;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.contact-item h4 {
+    color: var(--secondary);
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+}
